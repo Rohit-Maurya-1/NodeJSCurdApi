@@ -45,7 +45,7 @@ module.exports.addManageUser = async (req, res, next) => {
 module.exports.getManageUser = async (req, res, next) => {
   try {
     const getData = await manageUser.find();
-    if (!getData) {
+    if (!getData){
       return res.status(400).send({
         status: false,
         message: "not get data",
@@ -101,7 +101,7 @@ module.exports.DeleteManageUser = async (req,res,next)=>{
       return res.status(400).send({
         status: false,
         message: "user not deleted",
-        Response: {},
+        Response:{},
       });
     }
     res.status(200).send({
@@ -113,6 +113,43 @@ module.exports.DeleteManageUser = async (req,res,next)=>{
       next(error)
   }
   };
-  //=======================================pagination===========================
-   module.exports.pagination= async (req,res)=>{
+  //=======================================seraching Data=======================================
+  module.exports.searchAllData= async(req,res,next)=>{
+   try {
+    const getData= await manageUser.find({
+      "$or":[
+        {"name":{$regex:req.params.key}},
+        // {"email":{$regex:req.params.key}}
+      ]
+    })
+    res.status(200).send({
+      status:200,
+      maessage:"user search successfully",
+      response:getData
+    })
+    } catch (error) {
+     next(error)
+   }
   }
+
+  //=====================================filterData=========================================
+  module.exports.getSearchFilter= async(req, res, next)=>{
+    try {
+       const filters = req.query;
+       const setdata=  await manageUser.find()
+       const filteredUsers = setdata.filter(user=>{
+       let isValid = true;
+      for (key in filters) {
+        console.log(key, user[key], filters[key]);
+        isValid = isValid && user[key] == filters[key];
+       }
+      return isValid;
+     });
+     console.log(filteredUsers)
+     res.send(filteredUsers);
+   
+  } catch (error) {
+      next(error)
+    }
+  }
+    

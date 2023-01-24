@@ -11,6 +11,6 @@ const dotenv=require("dotenv")
 }).then((res)=>{
      console.log("connection successfully")
 }).catch((err)=>{
- console.log("connection  error")
+ console.log("connection error")
 })
 module.exports=connection;
