@@ -9,7 +9,7 @@ module.exports.addBusinessList = async (req, res, next) => {
       availableHours,
       websiteLink,
     } = req.body;
-    const emailData = await BusinessModel.findOne({ emailAddress });
+    const emailData = await BusinessModel.findOne({emailAddress});
     if (emailData) {
       return res.status(401).send({
         status: false,

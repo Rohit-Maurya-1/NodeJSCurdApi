@@ -119,7 +119,7 @@ module.exports.DeleteManageUser = async (req,res,next)=>{
     const getData= await manageUser.find({
       "$or":[
         {"name":{$regex:req.params.key}},
-        // {"email":{$regex:req.params.key}}
+        {"email":{$regex:req.params.key}}
       ]
     })
     res.status(200).send({
@@ -135,7 +135,7 @@ module.exports.DeleteManageUser = async (req,res,next)=>{
   //=====================================filterData=========================================
   module.exports.getSearchFilter= async(req, res, next)=>{
     try {
-       const filters = req.query;
+       const filters =req.query;
        const setdata=  await manageUser.find()
        const filteredUsers = setdata.filter(user=>{
        let isValid = true;

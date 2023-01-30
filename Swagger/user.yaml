@@ -1,0 +1,118 @@
+swagger: "2.0"
+info: 
+  title: this is my swagger UI 
+  description: This is my company documentation made by Rohit Maurya
+  version: 1.0
+  contact:
+    email: rohitmauryav@gmail.com
+  liscence:
+       name: Apache 2.0
+       url: "http://apache.org/"
+  server:
+      -url : "http://localhost:8000/"
+      description: This is my local server
+      -url : "http://company.com/"
+      description : This is my company server    
+    
+schemes: [http,https]
+
+paths:
+    /string:
+      get:
+        summary: return a string
+        description: it is just returing a facke strinng
+        responses:
+          200:
+            description: Success
+          400:
+            description: User error
+          500:  
+            description: Internal server error
+          
+/user:
+       get:
+         summary: return a string
+         description: it is just returing a facke strinng
+         responses:
+           200:
+             description: Success
+             schema:
+               type: object
+               properties:
+                 id:
+                   type: integer
+                 name:
+                    type: string  
+
+
+
+
+    /register:
+       post:
+         tags:               
+           - User Register
+         summary: return a string
+         produces:
+           - application/json
+         consumes:
+           - application/json 
+         parameters:
+           - in: body
+             name: User
+         properties:
+          name:
+            type: string
+          email:
+            type: string
+          password:
+            type: string
+         responses:
+           200:
+             description: OK
+
+
+    /login:
+       post:
+         tags:               
+           - User login
+         summary: return a string
+         produces:
+           - application/json
+         consumes:
+           - application/json 
+         parameters:
+           - in: body
+             name: login
+         properties:
+          
+          email:
+            type: string
+          password:
+            type: string
+         responses:
+           200:
+             description: OK
+
+
+definitions:
+    User:
+      type: object
+      properties:
+        userName:
+            type: string
+        email:
+            type: string
+        password:
+            type: string    
+    login:
+      type: object
+      properties:
+       email:
+            type: string
+        password:
+            type: string                
+
+
+   
+
+         

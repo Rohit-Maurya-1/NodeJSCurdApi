@@ -7,7 +7,7 @@ const validation=(req,res,next)=>{
   });
   let {error}= JoiSchema.validate(req.body,{abortEarly:false});
   if (error) {
-    const { message } = error;
+    const {message}=error;
     return res.status(200).send({
       status: false,
       message: message,
