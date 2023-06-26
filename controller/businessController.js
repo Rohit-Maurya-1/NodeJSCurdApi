@@ -1,6 +1,8 @@
 const BusinessModel = require("../model/businessModel");
 module.exports.addBusinessList = async (req, res, next) => {
   try {
+    console.log(req.body,"ooooooooooooooooooooooooooooooooooooooooooooo")
+    console.log(req.file,"fjfrjfjfjfrjfrjfrfjfjjf")
     const {
       businessName,
       address,
@@ -24,9 +26,9 @@ module.exports.addBusinessList = async (req, res, next) => {
       phoneNumber,
       availableHours,
       websiteLink,
-      profile: req.file.filename,
+      profile:req.file.filename,
     });
-    if (!addBusinessData) {
+    if (!addBusinessData){
       return res.status(401).send({
         status: false,
         message: "not data",
@@ -49,7 +51,7 @@ module.exports.getBusinessDetails = async (req, res, next) => {
     if (!getData) {
       return res.status(400).send({
         status: false,
-        message: "not get data",
+        message:"not get data",
         response: {},
       });
     }
@@ -66,8 +68,7 @@ module.exports.getBusinessDetails = async (req, res, next) => {
 module.exports.UpdateBusinessDetails = async (req, res, next) => {
   try {
     const _id = req.params.id;
-    const { businessName, address, phoneNumber, availableHours, websiteLink } =
-      req.body;
+    const { businessName, address, phoneNumber, availableHours, websiteLink } = req.body;
     if (req.file) {
       var dataRecords = {
         businessName,
@@ -87,7 +88,7 @@ module.exports.UpdateBusinessDetails = async (req, res, next) => {
       };
     }
     const updateData = await BusinessModel.findByIdAndUpdate(_id, dataRecords);
-    if (!updateData) {
+    if (!updateData){
       return res.status(400).send({
         status: false,
         message: "user not update",
@@ -95,11 +96,11 @@ module.exports.UpdateBusinessDetails = async (req, res, next) => {
       });
     }
     res.status(200).send({
-      status: true,
+      status:true,
       message: "user update successfully",
       Response: updateData,
     });
-  } catch (error) {
+  } catch (error){
     next(error);
   }
 };

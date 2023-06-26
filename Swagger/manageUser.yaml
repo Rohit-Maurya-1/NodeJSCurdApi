@@ -1,0 +1,38 @@
+    swagger: "2.0"
+info: 
+  title: this is my swagger UI 
+  description: This is my company documentation made by Rohit Maurya
+  version: 1.0
+  contact:
+    email: rohitmauryav@gmail.com
+  liscence:
+       name: Apache 2.0
+       url: "http://apache.org/"
+  server:
+      -url : "http://localhost:8000/"
+      description: This is my local server
+      -url : "http://company.com/"
+      description : This is my company server    
+    
+schemes: [http,https]
+    
+    /userAdd:
+       post:
+         summary: return a string
+         produces:
+           - application/json
+         consumes:
+           - application/json 
+         parameters:
+           - in: body
+             name: User
+         properties:
+          name:
+            type: string
+          email:
+            type: string
+          phoneNumber:
+            type: string
+         responses:
+           200:
+             description: OK

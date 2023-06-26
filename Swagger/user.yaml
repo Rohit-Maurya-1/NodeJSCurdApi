@@ -15,7 +15,6 @@ info:
       description : This is my company server    
     
 schemes: [http,https]
-
 paths:
     /string:
       get:
@@ -28,8 +27,9 @@ paths:
             description: User error
           500:  
             description: Internal server error
-          
-/user:
+
+
+    /user:
        get:
          summary: return a string
          description: it is just returing a facke strinng
@@ -49,8 +49,7 @@ paths:
 
     /register:
        post:
-         tags:               
-           - User Register
+         
          summary: return a string
          produces:
            - application/json
@@ -73,8 +72,8 @@ paths:
 
     /login:
        post:
-         tags:               
-           - User login
+                     
+           
          summary: return a string
          produces:
            - application/json
@@ -104,13 +103,7 @@ definitions:
             type: string
         password:
             type: string    
-    login:
-      type: object
-      properties:
-       email:
-            type: string
-        password:
-            type: string                
+               
 
 
    

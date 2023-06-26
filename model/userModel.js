@@ -1,34 +1,44 @@
-const  mongoose =require("mongoose")
-const jwt =require("jsonwebtoken");
-  const SECRET_JWT= "rohit" 
-// const {userSchema,UserData}=mongoose
-  const  userSchema= mongoose.Schema({
-    userName:{
-        type:String,
-        required:true
+const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+const SECRET_JWT = "rohit";
+const userSchema = mongoose.Schema(
+  {
+    username: {
+      type: String,
+    
     },
-    email:{
-        type:String,
-        required:true,
+    email: {
+      type: String,
+      
     },
-    password:{
-        type:String,
-        required:true
+    password: {
+      type: String,
+      
     },
-    token:{
-        type:String
+    phoneNumber: {
+      type: Number,
     },
-   
-},
-  {timestamps:true}
-)
-userSchema.methods.generateToken=function(){
-    let token=jwt.sign({id:this._id,email:this.email},SECRET_JWT);
-    return token;
-}
-  
-   const UserData= mongoose.model("userData",userSchema)
-   module.exports=UserData;
+    token: {
+      type: String,
+    },
+    role:{
+      type:String,
+      enum:['subAdmin','admin'],
+      default:"viewer"
+    },
+    // isAdmin:{
+    //   type:Boolean,
+    //   default:false
+    // },
+    otp:{
+       type:String
+    }
+  },
+  { timestamps: true }
+);
+userSchema.methods.generateToken = function () {
+  return jwt.sign({ id: this._id, email: this.email,isAdmin: this.isAdmin, role:this.role }, SECRET_JWT);
+};
 
-
-
+const UserData = mongoose.model("userData", userSchema);
+module.exports = UserData;
